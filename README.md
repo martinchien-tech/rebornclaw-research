@@ -10,6 +10,7 @@ RebornClaw 技术团队的研究报告汇总。
 | [alibaba/open-code-review 深度调研](alibaba-open-code-review-深度调研报告.html) | 2026-07-28 | 代码审查 |
 | [归因链信任体系技术提案](归因链信任体系技术提案.md) | 2026-07-28 | Multi-Agent 信任 |
 | [审计 Agent 原型](audit-agent-原型.js) | 2026-07-28 | 归因链实现 |
+| [信任链深度研究](信任链.md) | 2026-07-28 | Multi-Agent 信任 |
 
 ## 关于 RebornClaw
 
