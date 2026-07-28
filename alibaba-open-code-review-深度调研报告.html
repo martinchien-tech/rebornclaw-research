@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>alibaba/open-code-review (OCR) 深度调研报告</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #f5f5f7;
+    color: #1d1d1f;
+    line-height: 1.8;
+    padding: 0;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #fff;
+    padding: 60px 24px;
+    text-align: center;
+    border-radius: 0 0 24px 24px;
+  }
+  .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header .subtitle { font-size: 15px; color: #94a3b8; }
+  .header .meta { font-size: 13px; color: #64748b; margin-top: 12px; }
+  .section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    margin: 24px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .section h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #3b82f6;
+    display: inline-block;
+  }
+  .section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #334155;
+    margin: 20px 0 10px;
+  }
+  .section p { margin-bottom: 14px; color: #475569; }
+  .section ul, .section ol { margin: 10px 0 14px 20px; color: #475569; }
+  .section li { margin-bottom: 6px; }
+  .highlight { background: #f0f9ff; border-left: 4px solid #3b82f6; padding: 14px 18px; margin: 14px 0; border-radius: 0 8px 8px 0; }
+  .highlight-blue { background: #eff6ff; border-left: 4px solid #3b82f6; }
+  .highlight-green { background: #f0fdf4; border-left: 4px solid #22c55e; }
+  .highlight-yellow { background: #fefce8; border-left: 4px solid #eab308; }
+  .highlight-red { background: #fef2f2; border-left: 4px solid #ef4444; }
+  .arch-diagram {
+    background: #1e293b;
+    color: #e2e8f0;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+    font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .arch-diagram .arrow { color: #60a5fa; }
+  .arch-diagram .box { color: #a78bfa; }
+  .arch-diagram .label { color: #34d399; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  th {
+    background: #1e293b;
+    color: #f1f5f9;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+  }
+  th:first-child { border-radius: 8px 0 0 0; }
+  th:last-child { border-radius: 0 8px 0 0; }
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #475569;
+  }
+  tr:nth-child(even) td { background: #f8fafc; }
+  tr:hover td { background: #f1f5f9; }
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0 2px;
+  }
+  .tag-green { background: #dcfce7; color: #166534; }
+  .tag-blue { background: #dbeafe; color: #1e40af; }
+  .tag-yellow { background: #fef9c3; color: #854d0e; }
+  .tag-red { background: #fee2e2; color: #991b1b; }
+  .code-block {
+    background: #1e293b;
+    color: #e2e8f0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+  .code-block .comment { color: #94a3b8; }
+  .code-block .cmd { color: #f472b6; }
+  .code-block .arg { color: #34d399; }
+  .footer {
+    text-align: center;
+    padding: 32px 0;
+    color: #94a3b8;
+    font-size: 13px;
+  }
+  .badge-row { margin: 12px 0; }
+  .badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; margin: 0 4px 4px 0; }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+  .badge-green { background: #dcfce7; color: #166534; }
+  .badge-purple { background: #f3e8ff; color: #6b21a8; }
+  .badge-orange { background: #ffedd5; color: #9a3412; }
+  .summary-box {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border: 1px solid #bae6fd;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+  }
+  .summary-box p { color: #0c4a6e; margin-bottom: 6px; }
+  .divider { border: none; height: 1px; background: linear-gradient(to right, transparent, #e2e8f0, transparent); margin: 32px 0; }
+  @media (max-width: 640px) {
+    .container { padding: 16px; }
+    .section { padding: 20px; }
+    .header { padding: 40px 16px; }
+    .header h1 { font-size: 22px; }
+    table { font-size: 13px; }
+    .arch-diagram { font-size: 11px; padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🔍 alibaba/open-code-review (OCR) 深度调研报告</h1>
+  <div class="subtitle">确定性工程 × 智能体混血架构 · 企业级代码审查方案</div>
+  <div class="meta">调研时间：2026-07-28 · 数据来源：GitHub / Hacker News / Reddit / YouTube</div>
+  <div class="badge-row">
+    <span class="badge badge-blue">⭐ 14,767 Stars</span>
+    <span class="badge badge-green">📈 +979 / day</span>
+    <span class="badge badge-purple">🚀 阿里内部孵化2年</span>
+    <span class="badge badge-orange">🔧 Go + TypeScript</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- 一、项目背景 -->
+<div class="section">
+  <h2>一、项目背景与社区热度</h2>
+
+  <div class="highlight highlight-blue">
+    <strong>起源与背书：</strong>Open Code Review 孵化自阿里巴巴集团内部官方的 AI 代码审查助手。在开源前，该工具在阿里内部已秘密服役 2 年，服务数万名内部开发者，累计识别出数百万个代码缺陷。
+  </div>
+
+  <p><strong>开源表现：</strong>项目采用 Apache-2.0 开源协议，代码结构主要由 <span class="tag tag-blue">Go（约占70%）</span>（负责 CLI 核心热路径与工程管线）和 <span class="tag tag-purple">TypeScript（约占17%）</span>（负责 Agent 编排与 Web UI）构成。开源仅两个多月，目前已在 GitHub 斩获超 1.4 万颗星。</p>
+
+  <h3>核心痛点解决</h3>
+  <p>阿里的开源动机非常明确——解决当前社区在使用 Claude Code、GitHub Copilot CLI 等通用 Agent 进行代码审查时普遍存在的三大痛点：</p>
+  <ol>
+    <li><strong>覆盖不全（Cut Corners）：</strong>大模型在面对大型 PR 时容易"偷懒"，只看前几个文件而漏掉后面的变更。</li>
+    <li><strong>位置漂移（Position Drift）：</strong>AI 提的修改意见经常对不齐实际的代码行号。</li>
+    <li><strong>质量不稳定：</strong>完全依赖自然语言 Prompt 驱动的 AI Review 极难调试，Prompt 稍微改变，审查质量就剧烈波动。</li>
+  </ol>
+</div>
+
+<hr class="divider">
+
+<!-- 二、核心技术架构 -->
+<div class="section">
+  <h2>二、核心技术架构：确定性工程 × 智能体混血</h2>
+
+  <p>OCR 最核心的系统设计在于它拒绝纯大模型驱动，而是采用<strong>"确定性工程管线（Deterministic Pipeline）+ LLM Agent"</strong>的混血模式，让传统工程代码做效率与边界控制，让 AI 做深层语义理解。</p>
+
+  <div class="arch-diagram">[Git Diff / Codebase]
+       │
+       ▼
+┌────────────────────────────────────────────────────────┐
+│ 1. 确定性工程阶段 (Deterministic Pipeline / Go 编写)    │
+│    - 精准文件筛选与过滤 (排除无关文件)                  │
+│    - 智能文件分捆 (Related File Bundling)               │
+│    - 细粒度规则过滤 (基于模板引擎，消除非必要 Token)     │
+└───────────────────────┬────────────────────────────────┘
+                        │
+                        ▼ (分发给多个子智能体并发执行)
+┌────────────────────────────────────────────────────────┐
+│ 2. 智能体深度审查阶段 (LLM Sub-Agents / Tool-Use)     │
+│    - 具备工具调用能力，支持主动跨文件检索、搜索代码库   │
+│    - 结合阿里内部微调的专家规则库 (NPE、线程安全、安全漏洞) │
+└───────────────────────┬────────────────────────────────┘
+                        │
+                        ▼
+┌────────────────────────────────────────────────────────┐
+│ 3. 外部定位与反思模块 (External Positioning & Reflection)│
+│    - 独立行号对齐校验，彻底杜绝"行号漂移"               │
+│    - AI 反思模块过滤幻觉与低价值 Noise                │
+└────────────────────────────────────────────────────────┘</div>
+
+  <h3>1. 智能文件分捆（Smart File Bundling）</h3>
+  <p>传统的 AI 审查是一个个文件硬塞。OCR 会自动将强相关的变更（例如：国际化文件 <code>message_en.properties</code> 和 <code>message_zh.properties</code>，或者接口定义与实现类）打包成一个审查单元（Bundle），由一个独立的、上下文隔离的子智能体并发处理。这实现了在面对超大型项目时的"分而治之"。</p>
+
+  <h3>2. 细粒度规则匹配（Fine-grained Rule Matching）</h3>
+  <p>基于模板引擎（而非 LLM 提示词）过滤代码特征，确保模型注意力高度集中，从源头上抹除信息噪音。内置了阿里沉淀两年的核心缺陷规则库，涵盖空指针异常（NPE）、线程安全、XSS、SQL 注入等高危漏洞。</p>
+
+  <h3>3. 独立定位与反思模块（Positioning & Reflection Modules）</h3>
+  <p>AI 审查意见生成后，会经过一个独立的工程模块进行"行号校准"，并在输出前通过反思算法过滤掉无意义的格式吐槽，确保只保留高价值干货。</p>
+</div>
+
+<hr class="divider">
+
+<!-- 三、性能与基准测试 -->
+<div class="section">
+  <h2>三、性能与基准测试</h2>
+
+  <p>OCR 官方基于 <strong>50 个知名开源仓库、200 个真实 PR、跨 10 种编程语言</strong>（包含 Java、Go、Python、TS/JS、C++ 等），由 80 多位高级工程师人工标注了 1505 个真实缺陷，建立了行业首个真实代码审查基准测试。</p>
+
+  <h3>OCR 对比 通用 Agent（以 Claude Code 为例）</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>维度</th>
+        <th>Open Code Review (OCR)</th>
+        <th>通用 Agent (如 Claude Code)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>精准度 (Precision)</td>
+        <td><span class="tag tag-green">显著领先 🚀</span><br><small>由于反思模块和规则过滤</small></td>
+        <td>一般<br><small>存在低价值噪声和幻觉</small></td>
+      </tr>
+      <tr>
+        <td>F1 综合得分</td>
+        <td><span class="tag tag-green">显著更高</span></td>
+        <td>较低</td>
+      </tr>
+      <tr>
+        <td>Token 消耗量</td>
+        <td><span class="tag tag-green">仅为通用 Agent 的 ~1/9 💰</span></td>
+        <td>极高<br><small>需要吞下整个上下文</small></td>
+      </tr>
+      <tr>
+        <td>执行速度</td>
+        <td><span class="tag tag-green">极快</span><br><small>Go 热路径加持 + 并发 Bundle</small></td>
+        <td>较慢</td>
+      </tr>
+      <tr>
+        <td>召回率 (Recall)</td>
+        <td><span class="tag tag-yellow">故意调低</span><br><small>牺牲部分边缘召回以杜绝噪声</small></td>
+        <td>较高<br><small>但伴随大量无用建议</small></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="divider">
+
+<!-- 四、快速上手 -->
+<div class="section">
+  <h2>四、快速上手与集成工作流</h2>
+
+  <p>OCR 提供了极佳的生态适配，支持零配置（Zero-Config）交互式接入，兼容 OpenAI 和 Anthropic 等标准大模型 API。</p>
+
+  <h3>1. 终端 CLI 独立运行</h3>
+  <p>通过 npm 全局安装，支持全平台：</p>
+
+  <div class="code-block">
+    <span class="comment"># 安装</span>
+    <span class="cmd">npm install -g @alibaba-group/open-code-review</span>
+
+    <span class="comment"># 交互式配置大模型（如 Claude 或 OpenAI）</span>
+    <span class="cmd">ocr config provider</span>
+    <span class="cmd">ocr config model</span>
+  </div>
+
+  <p><strong>常用运行模式：</strong></p>
+  <ul>
+    <li><code>ocr review</code> — 默认模式，审查当前工作区所有暂存/未暂存的修改</li>
+    <li><code>ocr review --commit &lt;commit_id&gt;</code> — 对特定 commit 进行增量审查</li>
+    <li><code>ocr review --from main --to feature-branch</code> — 对比分支之间的 Diff 进行审查</li>
+    <li><code>ocr scan</code> — 全局扫描模式，适用于接手不熟悉的老旧代码库进行全面合规性审计</li>
+  </ul>
+
+  <h3>2. CI/CD 自动化流水线集成</h3>
+  <p>OCR 能够丝滑地嵌入到 GitHub Actions 或 GitLab CI 中，作为代码合并前的自动化硬网关。只需简单配置一行 <code>.gitlab-ci.yml</code>，即可在开发者提交 Merge Request 时自动触发审查，并将 AI 意见以行级评论的形式直接回写到代码评审界面中。</p>
+
+  <h3>3. 与 AI 编程工具联动：委派模式</h3>
+  <div class="highlight highlight-blue">
+    <p><strong>委派模式（Delegation Mode）：</strong>OCR 不再自己去调用第三方大模型端点，而是作为 Claude Code 的一个 Skill（扩展技能）插入。OCR 仅在底层负责它最擅长的"确定性工程"（文件切片、Bundle 打包、规则筛选），随后把提炼好的高效上下文委派给 Claude Code 宿主 Agent 自身去进行语义裁决。这完美化解了多次调用不同大模型的 Token 浪费。</p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 五、社区舆情 -->
+<div class="section">
+  <h2>五、社区舆情与总结反馈</h2>
+
+  <div class="highlight highlight-green">
+    <strong>👍 核心好评点：</strong>
+    <ul>
+      <li><strong>极度省钱：</strong>由于做了高精度的上下文裁剪，相较于直接把整段代码抛给 Claude 聊天，能省下将近 85% 以上的 Token 费用。</li>
+      <li><strong>真大厂工程实践：</strong>代码行号对得极准，且自带的 NPE（空指针）和安全漏洞规则库具有极高的实战价值，完全不是"玩具型项目"。</li>
+    </ul>
+  </div>
+
+  <div class="highlight highlight-yellow">
+    <strong>⚠️ 局限性与改进空间：</strong>
+    <ul>
+      <li><strong>知识固化：</strong>因为大局观受限于 Bundle 隔离，OCR 主要解决的是"代码对错"和"局部的健壮性"，对于系统整体的架构设计合理性、业务领域建模优雅性，无法给出类似资深架构师的宏观建议。</li>
+      <li><strong>上手门槛：</strong>尽管提供了 CLI 交互式配置，但对于想在企业内部自建闭环流水线（如对接私有化大模型或定制内部私有扫描规则）的团队，仍需一定的 DevOps 编写能力。</li>
+    </ul>
+  </div>
+
+  <div class="summary-box">
+    <p><strong>💡 总结建议：</strong></p>
+    <p>如果你正在寻找一款能够真正落地到团队 CI/CD 流程中、且不会因为 Token 账单爆炸而破产的 AI 自动化 Review 工具，<strong>alibaba/open-code-review 是目前整个开源界最值得采纳的生产级方案之一</strong>。</p>
+  </div>
+</div>
+
+<div class="footer">
+  <p>📄 调研：用户8519 · 数据采集：冉特助 (last30days) · 2026-07-28</p>
+  <p>数据来源：GitHub Trending / Hacker News / Reddit / YouTube / 阿里官方文档</p>
+</div>
+
+</div>
+</body>
+</html>
