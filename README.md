@@ -19,6 +19,7 @@
 | [yorukot/superfile 深度调研](yorukot-superfile-深度调研.html) | 2026-07-29 | 开源工具 |
 | [moeru-ai/airi 深度架构研究](moeru-ai-airi-深度架构研究.html) | 2026-07-29 | AI 数字生命 |
 | [MemChain 记忆管理框架研究](memchain-记忆管理框架研究.html) | 2026-07-29 | AI 记忆管理 |
+| [i-have-adhd 编码Agent输出风格优化](i-have-adhd-编码Agent输出风格优化.html) | 2026-07-29 | 编码 Agent |
 
 ## 关于 RebornClaw
 
