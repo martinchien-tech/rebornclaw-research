@@ -1,4 +1,9 @@
 热点评说：Kimi K3大模型
+
+**作者：** Martin Chien · RebornClaw Technology Co., Ltd. CEO
+
+> **免责声明：** 本文基于公开资料整理分析，仅供技术交流参考。文中观点仅代表个人理解，不构成任何投资建议或商业决策依据。
+
 月之暗面（Moonshot AI）于 2026 年 7 月 27 日深夜正式在 Hugging Face 释放了 [Kimi K3](https://huggingface.co/moonshotai/Kimi-K3) 的完整模型权重。作为全球首个跨入 3 万亿参数级别的开放权重模型（总参数 2.8T），它在开源界扔下了一颗核弹。 [1] 
 抛开新闻通稿的吹捧，结合 Hugging Face、GitHub Issue、Reddit 以及国内大厂架构师在 Day 0 适配后的真实反馈，我们来硬核拆解 Kimi K3 到底“能不能打”。
 ------------------------------

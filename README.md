@@ -1,6 +1,10 @@
-﻿# RebornClaw Research
+# RebornClaw Research
 
-RebornClaw 技术团队的研究报告汇总。
+**作者：** Martin Chien · RebornClaw Technology Co., Ltd. CEO
+
+> **免责声明：** 本仓库所有内容均基于公开资料整理分析，仅供技术交流参考。文中观点仅代表个人理解，不构成任何投资建议或商业决策依据。作者及所属公司不对因使用本仓库内容而产生的任何直接或间接损失承担责任。
+
+---
 
 ## 目录
 
@@ -16,3 +20,7 @@ RebornClaw 技术团队的研究报告汇总。
 ## 关于 RebornClaw
 
 RebornClaw 是一个基于 OpenClaw 的 AI 智能体框架，专注于多 Agent 协作与自动化。
+
+---
+
+© 2026 RebornClaw Technology Co., Ltd. All rights reserved.
