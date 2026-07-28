@@ -1,4 +1,4 @@
-# RebornClaw Research
+﻿# RebornClaw Research
 
 **作者：** Martin Chien · RebornClaw Technology Co., Ltd. CEO
 
@@ -18,6 +18,7 @@
 | [Kimi K3 深度分析](kimi-k3-深度分析.html) | 2026-07-29 | 大模型趋势 |
 | [yorukot/superfile 深度调研](yorukot-superfile-深度调研.html) | 2026-07-29 | 开源工具 |
 | [moeru-ai/airi 深度架构研究](moeru-ai-airi-深度架构研究.html) | 2026-07-29 | AI 数字生命 |
+| [MemChain 记忆管理框架研究](memchain-记忆管理框架研究.html) | 2026-07-29 | AI 记忆管理 |
 
 ## 关于 RebornClaw
 
