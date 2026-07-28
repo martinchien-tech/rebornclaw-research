@@ -16,6 +16,8 @@
 | [审计 Agent 原型](audit-agent-原型.js) | 2026-07-28 | 归因链实现 |
 | [信任链深度研究](信任链.md) | 2026-07-28 | Multi-Agent 信任 |
 | [Kimi K3 深度分析](kimi-k3-深度分析.html) | 2026-07-29 | 大模型趋势 |
+| [yorukot/superfile 深度调研](yorukot-superfile-深度调研.html) | 2026-07-29 | 开源工具 |
+| [moeru-ai/airi 深度架构研究](moeru-ai-airi-深度架构研究.html) | 2026-07-29 | AI 数字生命 |
 
 ## 关于 RebornClaw
 
