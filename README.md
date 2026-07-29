@@ -2,7 +2,7 @@
 
 **作者：** Martin Chien · RebornClaw Technology Co., Ltd. CEO
 
-> **免责声明：** 本仓库所有内容均基于公开资料整理分析，仅供技术交流参考。文中观点仅代表个人理解，不构成任何投资建议或商业决策依据。作者及所属公司不对因使用本仓库内容而产生的任何直接或间接损失承担责任。
+> **免责声明：** 本仓库所有内容均基于公开资料整理分析，仅供技术交流参考。
 
 ---
 
@@ -20,6 +20,7 @@
 | [moeru-ai/airi 深度架构研究](moeru-ai-airi-深度架构研究.html) | 2026-07-29 | AI 数字生命 |
 | [MemChain 记忆管理框架研究](memchain-记忆管理框架研究.html) | 2026-07-29 | AI 记忆管理 |
 | [i-have-adhd 编码Agent输出风格优化](i-have-adhd-编码Agent输出风格优化.html) | 2026-07-29 | 编码 Agent |
+| [microsoft/AGT 竞品分析](microsoft-agent-governance-toolkit-竞品分析.html) | 2026-07-29 | Agent 安全治理 |
 
 ## 关于 RebornClaw
 
