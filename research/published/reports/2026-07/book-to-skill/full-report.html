@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book-to-Skill: From Retrieval to Reasoning &amp; Execution — 深度分析报告</title>
+<style>
+  /* ===== Reset & Base ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #f8f9fa;
+    color: #1a1a2e;
+    line-height: 1.7;
+    padding: 0;
+  }
+  /* ===== Container ===== */
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  /* ===== Header ===== */
+  .report-header {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #fff;
+    padding: 56px 24px 48px;
+    text-align: center;
+  }
+  .report-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .report-header .subtitle {
+    font-size: 1.05rem;
+    color: #b8b5d4;
+    margin-bottom: 20px;
+  }
+  .report-header .meta {
+    font-size: 0.9rem;
+    color: #9a96c0;
+  }
+  .report-header .meta span { margin: 0 8px; }
+  .report-header .meta .sep { color: #555; }
+  /* ===== Disclaimer ===== */
+  .disclaimer {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 32px 0;
+    font-size: 0.85rem;
+    color: #664d03;
+  }
+  .disclaimer strong { display: block; margin-bottom: 4px; font-size: 0.9rem; }
+  /* ===== Content ===== */
+  .content { padding: 32px 0 64px; }
+  .content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e2e8f0;
+    color: #1a1a2e;
+  }
+  .content h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-top: 28px;
+    margin-bottom: 10px;
+    color: #302b63;
+  }
+  .content p {
+    margin-bottom: 16px;
+    font-size: 1rem;
+  }
+  .content ul, .content ol {
+    margin: 12px 0 20px 24px;
+  }
+  .content li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+  .content strong {
+    color: #24243e;
+  }
+  /* ===== Blockquote / Highlight ===== */
+  .highlight-box {
+    background: #eef2ff;
+    border-left: 4px solid #6366f1;
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 0.95rem;
+    color: #1e1b4b;
+  }
+  .highlight-box strong { color: #312e81; }
+  /* ===== Divider ===== */
+  hr {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 40px 0;
+  }
+  /* ===== Footer ===== */
+  .report-footer {
+    background: #f1f3f5;
+    padding: 24px 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #6c757d;
+  }
+  .report-footer a { color: #302b63; }
+  /* ===== Responsive ===== */
+  @media (max-width: 600px) {
+    .report-header { padding: 40px 16px 32px; }
+    .report-header h1 { font-size: 1.6rem; }
+    .container { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="report-header">
+  <div class="container">
+    <h1>Book-to-Skill: From Retrieval to Reasoning &amp; Execution</h1>
+    <div class="subtitle">virgiliojr94/book-to-skill 单日暴增深度分析 — AI Agent 生态的"技能化知识库"里程碑</div>
+    <div class="meta">
+      <span>Martin Chien</span><span class="sep">·</span>
+      <span>RebornClaw Technology Co., Ltd.</span><span class="sep">·</span>
+      <span>2026-07-30</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ CONTENT ============ -->
+<div class="content">
+  <div class="container">
+
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+      <strong>⚠️ Disclaimer</strong>
+      This report is produced for informational and research purposes only. It does not constitute investment, financial, or legal advice. The analysis reflects the author's interpretation of publicly available information as of the publication date. RebornClaw Technology Co., Ltd. makes no representations or warranties regarding the accuracy, completeness, or timeliness of the content. Third-party trademarks, project names, and references remain the property of their respective owners. This document may contain forward-looking statements that are subject to risks and uncertainties; actual outcomes may differ materially.
+    </div>
+
+    <p>
+      virgiliojr94/book-to-skill 的单日暴增和爆火，不仅是一次成功的开源破圈，更是 AI Agent 生态从"检索时代（RAG）"向"技能时代（Skill-driven）"演进的一个关键里程碑。
+    </p>
+    <p>
+      这个项目的核心价值在于，它打破了传统知识库"只查不用"的僵局，将静态的书本知识直接"编译"成了 Agent 的主动执行能力。
+    </p>
+    <p>
+      针对这种"技能化知识库（Skill-based Knowledge Base）"的趋势，我们可以从以下几个核心维度来看：
+    </p>
+
+    <!-- ===== Section 1 ===== -->
+    <h2>1. 核心痛点解决：干掉昂贵的"发现循环税"与精度衰减</h2>
+    <p>
+      在过去，我们要让 Claude Code 或 Cursor 等 Agent 学习一本技术书，通常有两种做法，但这两种做法都有致命缺陷：
+    </p>
+
+    <div class="highlight-box">
+      <strong>做法 A（全部塞进上下文）：</strong> Claude 拥有 100 万甚至更长的上下文窗口。但把整本书塞进去，你需要在每一轮对话中为这些重复的 Token 持续付费，而且模型在面对海量吞吐时会出现"迷失在中间（Lost in the Middle）"的检索精度衰减。
+    </div>
+
+    <div class="highlight-box">
+      <strong>做法 B（动态 RAG 检索）：</strong> 让 Agent 自己去翻 PDF。这会产生极高的"发现循环税（Discovery Loop Tax）"——Agent 为了回答一个问题，需要先读目录、发现不懂的词、再去跳读特定页面、不断回溯。这些复杂的中间思考（Hops）全部会堆积在对话历史中，不仅严重消耗 Token 成本，还会逼迫 Agent 在中途进行严重的信息压缩，最终给到你一个降级的答案。
+    </div>
+
+    <p>
+      book-to-skill 的聪明之处在于"编译时（Compile-time）解决"。它在运行前一次性付清阅读和提取成本，把书本切碎、结构化，提取出核心的思维模型（Mental Models）、架构框架、反模式（Anti-patterns）和具体技术。在运行时，Claude Code 只需要按需加载几 KB 的特定章节 Skill，既省钱又精准。
+    </p>
+
+    <!-- ===== Section 2 ===== -->
+    <h2>2. 核心范式转变：从"检索（Retrieval）"走向"推理与执行（Reasoning &amp; Execution）"</h2>
+    <p>这个项目代表了知识库定义的范式级变化：</p>
+
+    <ul>
+      <li><strong>传统 RAG（知识库 1.0）：</strong> "请帮我查一下这本 PDF 第五章写了什么。" 目标是<em>找原文</em>。</li>
+      <li><strong>技能化知识库（知识库 2.0）：</strong> "请用这本技术书里推崇的架构设计模式，重构我当前的 Python 代码。" 目标是<em>用技术</em>。</li>
+    </ul>
+
+    <p>
+      当书本变成"Skill"后，Claude 并不是在做关键字匹配，而是将书中的抽象原则内化为了它的行为准则。它让技术书从"案头常备的参考书"变成了"坐在你身边的资深技术专家"，在随你敲代码的同时，实时用该书的哲学对你的代码进行 Lint 和 Review。
+    </p>
+
+    <!-- ===== Section 3 ===== -->
+    <h2>3. 对 AI Agent 生态的直接意义</h2>
+    <p>book-to-skill 的爆火，预示着 Agent 生态接下来会发生三大变化：</p>
+
+    <h3>3.1 "技能即资产"的软件开发新生态</h3>
+    <p>
+      未来的开源或商业竞争，可能不再是单纯拼谁的 Agent 框架写得好，而是拼谁的 Skill 库更丰富。例如，未来可能不需要去读懂复杂的 AWS 部署白皮书，只需要在终端运行 <code>claude skill load aws-well-architected</code>，Agent 就自动具备了最高标准的云架构设计技能。
+    </p>
+
+    <h3>3.2 技术出版物与知识产权的"新容器"</h3>
+    <p>
+      对于技术书作者或出版社来说，未来卖书的形式可能会发生改变。除了纸质书和电子书，作者还可以发售官方认证的"Agent 技能包（Verified Agent Skill）"。读者购买的不仅是阅读权，而是将该领域专家的思维肉身，一键注入到自己的 AI 编译器中。
+    </p>
+
+    <h3>3.3 对 MCP（Model Context Protocol）生态的强力补充</h3>
+    <p>
+      Anthropic 推出的 MCP 旨在解决 Agent 与外部工具连接的问题。而 book-to-skill 这种模式，解决的是 Agent 与"高密度人类智慧（Heavy Knowledge）"连接的问题，它让工具不仅仅有手和脚（读写文件/调 API），更有了高度专业化的思考框架。
+    </p>
+
+    <hr>
+
+    <!-- ===== Summary ===== -->
+    <h2>总结</h2>
+    <p>
+      virgiliojr94/book-to-skill 踩中了 Claude Code 等命令行 Agent 爆发的超级红利期。它用极度实用的 Python 脚本，以低成本、高效率的方式，证明了"让 AI 带着整座图书馆的智慧为你打工"是完全可行的。这种"知识资产技能化"的思路，毫无疑问会成为未来所有先进 Agent 架构的标配。
+    </p>
+
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="report-footer">
+  <div class="container">
+    <p>© 2026 <strong>Martin Chien</strong> · RebornClaw Technology Co., Ltd.</p>
+    <p>Published under the RebornClaw Research series. All rights reserved.</p>
+    <p><a href="https://github.com/martinchien-tech/rebornclaw-research">github.com/martinchien-tech/rebornclaw-research</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
